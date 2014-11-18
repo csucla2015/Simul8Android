@@ -26,6 +26,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,18 +64,36 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     TextView textView = (TextView) rowView.findViewById(R.id.textView1);
     TextView textView3 = (TextView) rowView.findViewById(R.id.textView3);
     TextView textView4 = (TextView) rowView.findViewById(R.id.textView4);
-
+    
     if(headers[position].equalsIgnoreCase("Laptop Availibility"))
     {	
-	    FakeNetLoader fl = new FakeNetLoader();
-	  	fl.execute("http://dev-mobileapi.stashd.org:8000/mwf_laptops?no_server_init");
+	  //  FakeNetLoader fl = new FakeNetLoader();
+	  //	fl.execute("http://dev-mobileapi.stashd.org:8000/mwf_laptops?no_server_init");
     }
+    Log.v("meet","Value position is"+String.valueOf(position));
+    Log.v("meet","Value is"+values[position]);
+    if(headers[position].equalsIgnoreCase("Room Reservations"))
+    {	
+    textView.setText( Html.fromHtml("<a href=\""+values[position]+"\">Click here for directions</a>"));
+    textView. setMovementMethod(LinkMovementMethod.getInstance());
+    }
+    else
+    {	
     textView.setText(values[position]);
+    Linkify.addLinks(textView, Linkify.ALL);
+    }
+    //textView.setAutoLinkMask(Linkify.ALL);  
+    //textView.setAutoLinkMask(Linkify.PHONE_NUMBERS);
     TextView textView1 = (TextView) rowView.findViewById(R.id.textView2);
-
+    Log.v("meet","Header position is"+String.valueOf(position));
+    Log.v("meet","Header is"+headers[position]);
     textView1.setText(headers[position]);
     TextView test = new TextView(context, null);
   
+    for(int i = 0 ; i < headers.length; i++)
+    	Log.v("meet", "headers" + headers[i]);
+    for(int i = 0 ; i < values.length; i++)
+    	Log.v("meet", "values" + values[i]);
     
     LinearLayout l1 = (LinearLayout) rowView.findViewById(R.id.linearLayout1);
    
@@ -86,6 +107,8 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     	l1.setBackgroundResource(R.color.trans1);
     	l1.setPadding(10, 10, 10, 10);
     	textView1.setTextSize(42);
+    	textView.setTextSize(28);
+    	textView.setTextColor(Color.parseColor("#88ff88"));
     	textView4.setVisibility(View.GONE);
 
     }
@@ -121,94 +144,6 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     
     return rowView;
   }
-  class FakeNetLoader extends AsyncTask<String, Void, String> {
-  	private final ProgressDialog dialog = new ProgressDialog(context);
-
-		protected void onPostExecute(String s) {			
-			super.onPostExecute("meet");
-			dialog.dismiss();
-		}
-
-		protected void onPreExecute(String s ) {		
-			super.onPreExecute();
-			Log.v("prehere","prehere");
-
-			dialog.setMessage("Fetching Results...");
-			dialog.show();			
-		}
-		@Override
-		protected String doInBackground(String... params) {	
-			
-		
-			  	String link = "http://www.google.com";
-		
-
-				
-				 InputStream is = null;
-			     JSONObject jObj = null;
-			     String json = "";
-				try {
-		            // defaultHttpClient
-		            DefaultHttpClient httpClient = new DefaultHttpClient();
-		            HttpGet get1;
-		          
-					 get1 = new HttpGet("http://dev-mobileapi.stashd.org:8000/mwf_laptops?no_server_init");
-
-		            HttpResponse httpResponse = httpClient.execute(get1);
-		            HttpEntity httpEntity = httpResponse.getEntity();
-		            is = httpEntity.getContent();           
-		 
-		        } catch (UnsupportedEncodingException e) {
-		            e.printStackTrace();
-		        } catch (ClientProtocolException e) {
-		            e.printStackTrace();
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		         
-		        try {
-		            BufferedReader reader = new BufferedReader(new InputStreamReader(
-		                    is, "iso-8859-1"), 8);
-		            StringBuilder sb = new StringBuilder();
-		            String line = null;
-		            while ((line = reader.readLine()) != null) {
-		                sb.append(line + "\n");
-		            }
-		            is.close();
-		            json = sb.toString();
-		        } catch (Exception e) {
-		            Log.e("Buffer Error", "Error converting result " + e.toString());
-		        }
-		        Log.v("JOSN",json);
-		        int laptop = json.indexOf("College Library");
-		        
-		        String avail = json.substring(laptop, laptop+45);
-		        int hyphen = avail.indexOf("-");
-		        String avail1 = avail.substring(hyphen);
-		        int num = avail1.indexOf("available");
-		        String avail2 = avail1.substring(1,num);
-
-		        Log.v("avail",avail2);
-		        values[pos] = avail2;
-		       /*
-		        // try parse the string to a JSON object
-		        try {
-		                jObj = new JSONObject(json);
-		            	String status = jObj.getString("status");
-		            	if(status.equals("200"))
-		            	{	
-		            		Log.v("BIG TIME TESt","YO");
-		            	}	
-		            	
-		        } catch (JSONException e) {
-		            Log.e("JSON Parser", "Error parsing data " + e.toString());
-		        }
-		        */
-	///////////////////////JUST MAKING THE FIRST REQUEST////////////////////////////////
-				return "meet";
-	
-			}	
-		
-		}
+  
 
 } 

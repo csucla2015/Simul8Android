@@ -23,6 +23,7 @@ import com.npi.blureffect.ImageUtils;
 import com.npi.blureffect.MySimpleArrayAdapter;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -88,11 +89,8 @@ public class ScreenSlidePageFragment extends Fragment {
 		headers[4] = "Laptop Availability";
 		headers[6] = "Contact";
 		headers[8] = "Room Reservations";
-		strings[0] = "Open Now \nStudy Rooms Available : 17 \nLaptops Not Available";
-		strings[2]= "Monday : 7:30 am - 11:00 pm \nTuesday : 7:30 am - 11:00 pm \nWednesday : 7:30 am - 11:00 pm \nThursday 7:30 am - 11:00 pm \nFriday 7:30 am - 11:00 pm";
-		strings[4] = "Laptops Not Available" ;
-		strings[6] = "310.825.3138";
-		strings[8] = "Study Rooms Available : 17";
+		strings[0] = "Open Now";
+		strings[8] = "http://maps.google.com/?q=Powell+Library";
 
 
 		headers[1] = "";
@@ -107,40 +105,120 @@ public class ScreenSlidePageFragment extends Fragment {
 		strings[9] = "";
 		if(mPageNumber == 2)
 		{	
+			strings[6] = "(310) 825 1938";
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("College Library", null);
+			strings[2]= newhours;
+
 			rootView.setBackgroundResource(R.drawable.powell);
 			headers[0] =  getString(R.string.powell);
+			String laptops = settings1.getString("Powell Library Laptops",null);
+			strings[4] = laptops ;
+			strings[8] = "http://maps.google.com/?q=Powell+Library";
+
 		}
 		else if(mPageNumber == 1)
 		{	
-			rootView.setBackgroundResource(R.drawable.yrl);
+			strings[6] = "(310) 825-4732";
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Research Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.yrlnew);
 			headers[0] =  getString(R.string.yrl);
+			String laptops = settings1.getString("Research Library Laptops",null);
+			strings[4] = laptops ;
+			strings[8] = "http://maps.google.com/?q=UCLA Charles E. Young Research Library";
+
 		}
 		else if(mPageNumber == 3)
 		{	
+			strings[8] = "http://maps.google.com/?q=Rosenfeld Library";
+
+			strings[6] = "(310) 825-3138";
+			strings[4] = "Laptops Not Available" ;
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Management Library", null);
+			strings[2]= newhours;
 			rootView.setBackgroundResource(R.drawable.mgmt);
 			headers[0] =  getString(R.string.mgmt);
 		}
 		else if(mPageNumber == 4)
 		{	
+			strings[6] = "(310) 825-4951";
+
+			
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("SEL Eng & Math Sci", null);
+			strings[2]= newhours;
 			rootView.setBackgroundResource(R.drawable.seml);
 			headers[0] =  getString(R.string.seml);
+			String laptops = settings1.getString("SEL / Boelter Laptops",null);
+			strings[4] = laptops ;
+			strings[8] = "http://maps.google.com/?q=Science and Engineering Library/ Engineering and Mathematical Sciences";
 		}	
 		else if(mPageNumber == 0)
 		{	
+			strings[6] = "(310) 825-4882";
+
+			strings[8] = "http://maps.google.com/?q=Shoenberg Music Bldg";
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Music Library", null);
+    		String laptops = settings1.getString("Music Library Laptops",null);
+			strings[4] = laptops ;
+
+			strings[2]= newhours;
 			rootView.setBackgroundResource(R.drawable.music);
 			headers[0] =  getString(R.string.music);
 		}
+		else if(mPageNumber == 5)
+		{	
+			strings[6] = "(310) 206-5425";
+			strings[8] = "http://maps.google.com/?q=Arts Library";
 
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Arts Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.arts);
+			headers[0] =  getString(R.string.arts);
+			String laptops = settings1.getString("Arts Library Laptops",null);
+			strings[4] = laptops ;
+		}
+		else if(mPageNumber == 6)
+		{	
+			strings[6] = "(310) 825-6414";
+			strings[8] = "http://maps.google.com/?q=Hugh and Hazel Darling Law Library";
+
+			
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Arts Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.law);
+			headers[0] =  getString(R.string.law);
+			strings[4] = "Laptops Not Available" ;
+
+		}
+		else if(mPageNumber == 7)
+		{	
+			strings[6] = "(310) 825-4904";
+			strings[8] = "http://maps.google.com/?q=UCLA Louise M. Darling Biomedical Library";
+
+			
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Arts Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.biomed);
+			headers[0] =  getString(R.string.biomed);
+			strings[4] = "Laptops Not Available" ;
+
+		}
 		// Get the screen width
 		final int screenWidth = ImageUtils.getScreenWidth(getActivity());
 
 		// Try to find the blurred image
 	
-		
-
-		
-		
-		
 		MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(getActivity(), strings, headers);
 		mList.addHeaderView(headerView);
 		mList.setAdapter(adapter); 

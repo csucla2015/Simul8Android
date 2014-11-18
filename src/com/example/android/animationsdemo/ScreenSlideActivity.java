@@ -16,6 +16,7 @@
 
 package com.example.android.animationsdemo;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -25,7 +26,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 /**
@@ -39,16 +42,20 @@ import android.view.MenuItem;
  *
  * @see ScreenSlidePageFragment
  */
-public class ScreenSlideActivity extends FragmentActivity {
+public class ScreenSlideActivity extends FragmentActivity implements
+ActionBar.OnNavigationListener  {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 5;
+    private static final int NUM_PAGES = 8;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
      */
+    private ActionBar actionBar;
+
+	private MenuItem refreshMenuItem;
     private ViewPager mPager;
 
     /**
@@ -60,7 +67,10 @@ public class ScreenSlideActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
-
+        actionBar = getActionBar();
+		actionBar.setDisplayShowTitleEnabled(true);
+		// Enabling Spinner dropdown navigation
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
@@ -77,9 +87,13 @@ public class ScreenSlideActivity extends FragmentActivity {
         });
     }
 
+
+
+	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
+        
+    	super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
 
         menu.findItem(R.id.action_previous).setEnabled(mPager.getCurrentItem() > 0);
@@ -91,7 +105,10 @@ public class ScreenSlideActivity extends FragmentActivity {
                         ? R.string.action_finish
                         : R.string.action_next);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.activity_main_actions, menu);
+    	return super.onCreateOptionsMenu(menu);
+        //return true;
     }
 
     @Override
@@ -115,8 +132,23 @@ public class ScreenSlideActivity extends FragmentActivity {
                 mPager.setCurrentItem(mPager.getCurrentItem() + 1);
                 return true;
         }
-
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+    	
+    	
+    	case R.id.action_help:
+    		Log.v("meet","HELP CLICKED");
+    		return true;
+    	case R.id.action_check_updates:
+    	{	
+    		// check for updates action
+    		Log.v("meet","UPDATES");
+    	
+    		return true;
+    	}	
+    	default:
+    		return super.onOptionsItemSelected(item);
+    	}
+        
     }
 
     /**
@@ -138,4 +170,10 @@ public class ScreenSlideActivity extends FragmentActivity {
             return NUM_PAGES;
         }
     }
+
+	@Override
+	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

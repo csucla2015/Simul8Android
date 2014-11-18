@@ -17,7 +17,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Titles -->
-    <string name="app_name">Animations Demo</string>
+    <string name="app_name">UCLA Library</string>
     <string name="title_crossfade">Simple Crossfade</string>
     <string name="title_card_flip">Card Flip</string>
     <string name="title_screen_slide">Screen Slide</string>
@@ -27,8 +27,11 @@
     <string name="mgmt">Management Library</string>
     <string name="yrl">Young Research Library(YRL)</string>
     <string name="seml">Science and Engineering Library</string>
-    <string name="biomed">Biomedical Library</string>
     <string name="music">Music Library</string>
+    <string name="law">Law Library</string>
+    <string name="arts">Arts Library</string>
+    <string name="biomed">Biomedical Library</string>
+    
     
     
     
@@ -47,7 +50,21 @@
     <string name="action_finish">Finish</string>
     <string name="action_info">Photo info</string>
     <string name="action_photo">View photo</string>
-
+	 <!-- Activity titles -->    
+    <string name="activity_location_found">Location Found</string>
+    
+    <!-- Action Bar action items -->
+    <string name="action_search">Sarch</string>
+    <string name="action_location_found">Location Found</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_contacts">Contacts</string>
+    <string name="action_help">Help</string>
+    <string name="action_check_updates">Check for Updates</string>
+    
+    <!-- Search  -->
+    <string name="search_hint">Search color..</string>
+        <string name="action_settings">Settings</string>
+    
     <!-- Messages -->
     <string name="message_empty_layout_changes">Add an item above to get started.</string>
     <string name="message_zoom_touch_expand">Touch a photo to expand it.</string>
