@@ -180,6 +180,12 @@ ActionBar.OnNavigationListener  {
     		mPager.setCurrentItem(4);
     		return true;
     	}
+    	case R.id.settings:
+    	{
+    		Intent i = new Intent(ScreenSlideActivity.this,ListViewDraggingAnimation.class);
+			startActivity(i);
+			finish();
+    	}
     	default:
     		return super.onOptionsItemSelected(item);
     	}

@@ -9,6 +9,6 @@
     <dimen name="bkrd_hdr_margin">3dp</dimen>
     <dimen name="bkrd_table_margin">10dp</dimen>
     <dimen name="main_btn_txt">16dp</dimen>
-      <dimen name="list_text_size">16sp</dimen>
+      <dimen name="list_text_size">20sp</dimen>
     <dimen name="list_item_height">48dip</dimen>
 </resources>

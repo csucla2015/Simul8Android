@@ -18,12 +18,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/powell"
+    android:background="#212121"
     tools:context=".ListViewAnimations" >
 	
         <com.example.android.animationsdemo.DynamicListView
             android:id="@+id/listview"
-            android:background="#0000"
+            android:background="#212121"
+            android:divider="#424242"
+    		android:dividerHeight="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

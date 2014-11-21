@@ -49,6 +49,16 @@
      <item android:id="@+id/biomed"
           android:icon="@drawable/ic_action_refresh"
           android:title="Biomedical Library"
-                    android:showAsAction="never" />
+          android:showAsAction="never" />
+       
+     <item android:id="@+id/settings"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Settings"
+          android:showAsAction="never" />
+     
+       <item android:id="@+id/refresh"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Refresh"
+          android:showAsAction="never" />
            
 </menu>
