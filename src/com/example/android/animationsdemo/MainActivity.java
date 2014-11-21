@@ -76,6 +76,16 @@ ActionBar.OnNavigationListener {
 				
 			}
 		});
+		Button btn1 = (Button) findViewById(R.id.button2);
+		btn1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this,ListViewDraggingAnimation.class);
+				startActivity(i);
+				
+			}
+		});
 
 	}
 	@Override
