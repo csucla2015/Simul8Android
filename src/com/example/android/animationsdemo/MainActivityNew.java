@@ -68,10 +68,10 @@ ActionBar.OnNavigationListener {
 	switch (item.getItemId()) {
 	
 	
-	case R.id.action_help:
+	case R.id.powell:
 		Log.v("meet","HELP CLICKED");
 		return true;
-	case R.id.action_check_updates:
+	case R.id.yrl:
 	{	
 		// check for updates action
 		Log.v("meet","UPDATES");

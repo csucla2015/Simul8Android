@@ -75,6 +75,7 @@ ActionBar.OnNavigationListener  {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+       // mPager.setCurrentItem(1);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -135,16 +136,50 @@ ActionBar.OnNavigationListener  {
         switch (item.getItemId()) {
     	
     	
-    	case R.id.action_help:
+        case R.id.powell:
+        {	
     		Log.v("meet","HELP CLICKED");
+    		mPager.setCurrentItem(2);
     		return true;
-    	case R.id.action_check_updates:
+        }	
+    	case R.id.yrl:
     	{	
+    		mPager.setCurrentItem(1);
     		// check for updates action
     		Log.v("meet","UPDATES");
     	
     		return true;
-    	}	
+    	}
+    	case R.id.music:
+    	{
+    		mPager.setCurrentItem(0);
+    		return true;
+    	}
+    	case R.id.management:
+    	{
+    		mPager.setCurrentItem(3);
+    		return true;
+    	}
+    	case R.id.arts:
+    	{
+    		mPager.setCurrentItem(5);
+    		return true;
+    	}
+    	case R.id.law:
+    	{
+    		mPager.setCurrentItem(6);
+    		return true;
+    	}
+    	case R.id.biomed:
+    	{
+    		mPager.setCurrentItem(7);
+    		return true;
+    	}
+    	case R.id.sel:
+    	{
+    		mPager.setCurrentItem(4);
+    		return true;
+    	}
     	default:
     		return super.onOptionsItemSelected(item);
     	}

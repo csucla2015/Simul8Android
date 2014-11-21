@@ -90,10 +90,10 @@ ActionBar.OnNavigationListener {
 	// Take appropriate action for each action item click
 		switch (item.getItemId()) 
 		{	
-			case R.id.action_help:
+			case R.id.powell:
 				Log.v("meet","HELP CLICKED");
 				return true;
-			case R.id.action_check_updates:
+			case R.id.yrl:
 			{	
 				Log.v("meet","UPDATES");			
 				return true;

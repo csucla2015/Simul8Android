@@ -7,14 +7,48 @@
    
     
     <!-- Help -->
-    <item android:id="@+id/action_help"
+    <item android:id="@+id/powell"
           android:icon="@drawable/ic_action_help"
-          android:title="@string/action_help" 
+          android:title="Powell Library" 
           android:showAsAction="never"/>
     
-    <!-- Check updates -->
-    <item android:id="@+id/action_check_updates"
+     <item android:id="@+id/yrl"
           android:icon="@drawable/ic_action_refresh"
-          android:title="@string/action_check_updates"
+          android:title="Young Research Library"
           android:showAsAction="never" />
+     
+    <!-- Check updates -->
+    <item android:id="@+id/sel"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Science and Engineering Library"
+          android:showAsAction="never" />
+    
+    <item android:id="@+id/music"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Music Library"
+          android:showAsAction="never" />
+     
+     <item android:id="@+id/management"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Management Library"
+     android:showAsAction="never" />
+     
+     <item android:id="@+id/arts"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Arts Library"
+          android:showAsAction="never" />
+     
+     
+          
+     
+     <item android:id="@+id/law"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Law Library"     
+          android:showAsAction="never" />
+     
+     <item android:id="@+id/biomed"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Biomedical Library"
+                    android:showAsAction="never" />
+           
 </menu>

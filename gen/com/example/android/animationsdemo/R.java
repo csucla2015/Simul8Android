@@ -78,9 +78,7 @@ public final class R {
     }
     public static final class id {
         public static final int action_add_item=0x7f07001a;
-        public static final int action_check_updates=0x7f07001c;
         public static final int action_flip=0x7f070001;
-        public static final int action_help=0x7f07001b;
         /** 
         These action bar item IDs (menu item IDs) are defined here for
         programmatic use. Normally, IDs are created using the "@+id/foo"
@@ -90,10 +88,12 @@ public final class R {
     
          */
         public static final int action_next=0x7f070000;
-        public static final int action_previous=0x7f07001d;
-        public static final int action_settings=0x7f07001e;
+        public static final int action_previous=0x7f070023;
+        public static final int action_settings=0x7f070024;
         public static final int action_toggle=0x7f070019;
+        public static final int arts=0x7f070020;
         public static final int background_switch=0x7f070007;
+        public static final int biomed=0x7f070022;
         public static final int blurred_image=0x7f070004;
         public static final int blurred_image_header=0x7f070006;
         public static final int btncancel=0x7f070017;
@@ -103,11 +103,16 @@ public final class R {
         public static final int content=0x7f07000f;
         public static final int delete_button=0x7f070014;
         public static final int expanded_image=0x7f07000e;
+        public static final int law=0x7f070021;
         public static final int linearLayout1=0x7f070010;
         public static final int list=0x7f070005;
+        public static final int management=0x7f07001f;
+        public static final int music=0x7f07001e;
         public static final int normal_image=0x7f070003;
         public static final int pager=0x7f07000b;
+        public static final int powell=0x7f07001b;
         public static final int progressBar1=0x7f070016;
+        public static final int sel=0x7f07001d;
         public static final int textView1=0x7f070008;
         public static final int textView2=0x7f070011;
         public static final int textView3=0x7f070012;
@@ -116,6 +121,7 @@ public final class R {
         public static final int thumb_button_2=0x7f07000d;
         public static final int tv1=0x7f070015;
         public static final int tvper=0x7f070018;
+        public static final int yrl=0x7f07001c;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f080000;
