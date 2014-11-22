@@ -66,26 +66,25 @@ public final class R {
         public static final int ic_location=0x7f02000f;
         public static final int ic_my_places=0x7f020010;
         public static final int ico_actionbar=0x7f020011;
-        public static final int image=0x7f020012;
-        public static final int image1=0x7f020013;
-        public static final int image2=0x7f020014;
-        public static final int image3=0x7f020015;
-        public static final int image4=0x7f020016;
-        public static final int image5=0x7f020017;
-        public static final int image6=0x7f020018;
-        public static final int law=0x7f020019;
-        public static final int mgmt=0x7f02001a;
-        public static final int music=0x7f02001b;
-        public static final int photothumb=0x7f02001c;
-        public static final int powell=0x7f02001d;
-        public static final int seml=0x7f02001e;
-        public static final int thumb1=0x7f02001f;
-        public static final int thumb2=0x7f020020;
-        public static final int yrl=0x7f020021;
-        public static final int yrlnew=0x7f020022;
+        public static final int image1=0x7f020012;
+        public static final int image2=0x7f020013;
+        public static final int image3=0x7f020014;
+        public static final int image4=0x7f020015;
+        public static final int image5=0x7f020016;
+        public static final int law=0x7f020017;
+        public static final int mgmt=0x7f020018;
+        public static final int music=0x7f020019;
+        public static final int newsplash=0x7f02001a;
+        public static final int photothumb=0x7f02001b;
+        public static final int powell=0x7f02001c;
+        public static final int seml=0x7f02001d;
+        public static final int thumb1=0x7f02001e;
+        public static final int thumb2=0x7f02001f;
+        public static final int yrl=0x7f020020;
+        public static final int yrlnew=0x7f020021;
     }
     public static final class id {
-        public static final int action_add_item=0x7f080019;
+        public static final int action_add_item=0x7f08001a;
         public static final int action_flip=0x7f080001;
         /** 
         These action bar item IDs (menu item IDs) are defined here for
@@ -96,42 +95,43 @@ public final class R {
     
          */
         public static final int action_next=0x7f080000;
-        public static final int action_previous=0x7f080024;
-        public static final int action_settings=0x7f080026;
-        public static final int action_toggle=0x7f080018;
-        public static final int arts=0x7f08001f;
-        public static final int background_switch=0x7f080009;
-        public static final int biomed=0x7f080021;
-        public static final int blurred_image=0x7f080006;
-        public static final int blurred_image_header=0x7f080008;
+        public static final int action_previous=0x7f080025;
+        public static final int action_settings=0x7f080027;
+        public static final int action_toggle=0x7f080019;
+        public static final int arts=0x7f080020;
+        public static final int background_switch=0x7f08000a;
+        public static final int biomed=0x7f080022;
+        public static final int blurred_image=0x7f080007;
+        public static final int blurred_image_header=0x7f080009;
         public static final int btncancel=0x7f080016;
         public static final int button1=0x7f08000b;
         public static final int button2=0x7f08000c;
         public static final int container=0x7f080002;
         public static final int content=0x7f08000e;
         public static final int delete_button=0x7f080013;
-        public static final int home=0x7f080025;
-        public static final int law=0x7f080020;
+        public static final int home=0x7f080026;
+        public static final int law=0x7f080021;
         public static final int linearLayout1=0x7f08000f;
-        public static final int list=0x7f080007;
+        public static final int list=0x7f080008;
         public static final int listview=0x7f080004;
         public static final int mainLayout=0x7f080003;
-        public static final int management=0x7f08001e;
-        public static final int music=0x7f08001d;
-        public static final int normal_image=0x7f080005;
+        public static final int management=0x7f08001f;
+        public static final int music=0x7f08001e;
+        public static final int normal_image=0x7f080006;
         public static final int pager=0x7f08000d;
-        public static final int powell=0x7f08001a;
+        public static final int powell=0x7f08001b;
         public static final int progressBar1=0x7f080015;
-        public static final int refresh=0x7f080023;
-        public static final int sel=0x7f08001c;
-        public static final int settings=0x7f080022;
-        public static final int textView1=0x7f08000a;
+        public static final int refresh=0x7f080024;
+        public static final int sel=0x7f08001d;
+        public static final int settings=0x7f080023;
+        public static final int splashImage=0x7f080018;
+        public static final int textView1=0x7f080005;
         public static final int textView2=0x7f080010;
         public static final int textView3=0x7f080011;
         public static final int textView4=0x7f080012;
         public static final int tv1=0x7f080014;
         public static final int tvper=0x7f080017;
-        public static final int yrl=0x7f08001b;
+        public static final int yrl=0x7f08001c;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f090000;
@@ -150,7 +150,8 @@ public final class R {
         public static final int list_item=0x7f030009;
         public static final int list_item_example=0x7f03000a;
         public static final int progressdialog=0x7f03000b;
-        public static final int text_view=0x7f03000c;
+        public static final int splash=0x7f03000c;
+        public static final int text_view=0x7f03000d;
     }
     public static final class menu {
         public static final int activity_crossfade=0x7f0c0000;

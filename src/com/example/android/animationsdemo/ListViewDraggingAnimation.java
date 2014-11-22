@@ -102,7 +102,7 @@ ActionBar.OnNavigationListener {
             	SharedPreferences settings3 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
         		SharedPreferences.Editor editor3 = settings3.edit();
         		editor3.putString(String.valueOf(i), libraries[i]);
-        		editor3.putString(libraries[i], String.valueOf(i));
+        		editor3.putString(libraries[i]+"new", String.valueOf(i));
 
         		editor3.apply();
             }

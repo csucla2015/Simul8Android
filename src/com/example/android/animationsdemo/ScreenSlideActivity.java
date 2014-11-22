@@ -89,8 +89,6 @@ ActionBar.OnNavigationListener  {
         });
     }
 
-
-
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,7 +117,7 @@ ActionBar.OnNavigationListener  {
             case android.R.id.home:
                 // Navigate "up" the demo structure to the launchpad activity.
                 // See http://developer.android.com/design/patterns/navigation.html for more.
-                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
+                NavUtils.navigateUpTo(this, new Intent(this, ScreenSlideActivity.class));
                 return true;
 
             case R.id.action_previous:
@@ -142,49 +140,49 @@ ActionBar.OnNavigationListener  {
     	
         case R.id.powell:
         {	
-        	String pos = settings1.getString("Powell Library", "yolo");
+        	String pos = settings1.getString("Powell Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));
     		return true;
         }	
     	case R.id.yrl:
     	{	
-    		String pos = settings1.getString("Young Research Library", "yolo");
+    		String pos = settings1.getString("Young Research Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));
     		return true;
     	}
     	case R.id.music:
     	{
-    		String pos = settings1.getString("Music Library", "yolo");
+    		String pos = settings1.getString("Music Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.management:
     	{
-    		String pos = settings1.getString("Management Library", "yolo");
+    		String pos = settings1.getString("Management Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.arts:
     	{
-    		String pos = settings1.getString("Arts Library", "yolo");
+    		String pos = settings1.getString("Arts Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.law:
     	{
-    		String pos = settings1.getString("Law Library", "yolo");
+    		String pos = settings1.getString("Law Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.biomed:
     	{
-    		String pos = settings1.getString("Biomedical Library", "yolo");
+    		String pos = settings1.getString("Biomedical Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.sel:
     	{
-    		String pos = settings1.getString("Science and Engineering Library", "yolo");
+    		String pos = settings1.getString("Science and Engineering Librarynew", "yolo");
     		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
@@ -225,4 +223,5 @@ ActionBar.OnNavigationListener  {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 }

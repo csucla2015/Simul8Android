@@ -69,6 +69,7 @@ public class ScreenSlidePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
     	Log.v("meet1","we are in fragments");
         super.onCreate(savedInstanceState);
+        
         mPageNumber = getArguments().getInt(ARG_PAGE);
         System.out.println(mPageNumber);
     }
