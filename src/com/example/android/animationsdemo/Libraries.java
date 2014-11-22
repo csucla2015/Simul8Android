@@ -16,7 +16,14 @@
 
 package com.example.android.animationsdemo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 public class Libraries {
+	Context applicationContext = ListViewDraggingAnimation.getContextOfApplication();
+
+	SharedPreferences settings1 = applicationContext.getSharedPreferences("com.example.android.animationsdemo", 0);
+	String a = settings1.getString(String.valueOf(1), "yolo");
 
     public static final String[] sCheeseStrings = {
             "Powell Library", "Young Research Library",

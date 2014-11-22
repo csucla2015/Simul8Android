@@ -18,7 +18,9 @@ package com.example.android.animationsdemo;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
@@ -40,11 +42,15 @@ import java.util.ArrayList;
  */
 public class ListViewDraggingAnimation extends Activity implements
 ActionBar.OnNavigationListener {
+	public static Context contextOfApplication;
+
+
 	 private ActionBar actionBar;
 	 DynamicListView listView;
 	private MenuItem refreshMenuItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	contextOfApplication = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         actionBar = getActionBar();
@@ -53,7 +59,8 @@ ActionBar.OnNavigationListener {
   		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         ArrayList<String>mCheeseList = new ArrayList<String>();
         for (int i = 0; i < Libraries.sCheeseStrings.length; ++i) {
-            mCheeseList.add(Libraries.sCheeseStrings[i]);
+        	SharedPreferences settings1 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+            mCheeseList.add(settings1.getString(String.valueOf(i),"yolo"));
         }
 
         StableArrayAdapter adapter = new StableArrayAdapter(this, R.layout.text_view, mCheeseList);
@@ -63,6 +70,9 @@ ActionBar.OnNavigationListener {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         
+    }
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,7 +90,22 @@ ActionBar.OnNavigationListener {
     	case R.id.home:
     	{
             TextView tv = (TextView) listView.getChildAt(0);
-            Log.v("meet","Text from textview" + tv.getText());
+            Log.v("settingspage","Text from textview" + tv.getText());
+            int k = listView.getCount();
+            Log.v("settingspage","Number of views"+String.valueOf(k));
+            String[] libraries = new String[k];
+            for(int i = 0 ; i< k ; i++)
+            {
+                tv = (TextView) listView.getChildAt(i);
+            	libraries[i] = (String) tv.getText();
+            	Log.v("settingspage","valueoflib"+libraries[i]);
+            	SharedPreferences settings3 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+        		SharedPreferences.Editor editor3 = settings3.edit();
+        		editor3.putString(String.valueOf(i), libraries[i]);
+        		editor3.putString(libraries[i], String.valueOf(i));
+
+        		editor3.apply();
+            }
     		Intent i = new Intent(ListViewDraggingAnimation.this,ScreenSlideActivity.class);
 			startActivity(i);
 			finish();

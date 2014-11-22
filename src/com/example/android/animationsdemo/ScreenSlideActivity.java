@@ -20,6 +20,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -75,7 +76,7 @@ ActionBar.OnNavigationListener  {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-       // mPager.setCurrentItem(1);
+        mPager.setCurrentItem(0);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -133,51 +134,58 @@ ActionBar.OnNavigationListener  {
                 mPager.setCurrentItem(mPager.getCurrentItem() + 1);
                 return true;
         }
-        switch (item.getItemId()) {
-    	
+        SharedPreferences settings1 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+
+        switch (item.getItemId()) 
+        {
+
     	
         case R.id.powell:
         {	
-    		Log.v("meet","HELP CLICKED");
-    		mPager.setCurrentItem(2);
+        	String pos = settings1.getString("Powell Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));
     		return true;
         }	
     	case R.id.yrl:
     	{	
-    		mPager.setCurrentItem(1);
-    		// check for updates action
-    		Log.v("meet","UPDATES");
-    	
+    		String pos = settings1.getString("Young Research Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));
     		return true;
     	}
     	case R.id.music:
     	{
-    		mPager.setCurrentItem(0);
+    		String pos = settings1.getString("Music Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.management:
     	{
-    		mPager.setCurrentItem(3);
+    		String pos = settings1.getString("Management Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.arts:
     	{
-    		mPager.setCurrentItem(5);
+    		String pos = settings1.getString("Arts Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.law:
     	{
-    		mPager.setCurrentItem(6);
+    		String pos = settings1.getString("Law Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.biomed:
     	{
-    		mPager.setCurrentItem(7);
+    		String pos = settings1.getString("Biomedical Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.sel:
     	{
-    		mPager.setCurrentItem(4);
+    		String pos = settings1.getString("Science and Engineering Library", "yolo");
+    		mPager.setCurrentItem(Integer.parseInt(pos));    		
     		return true;
     	}
     	case R.id.settings:

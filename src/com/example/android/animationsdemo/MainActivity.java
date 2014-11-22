@@ -164,7 +164,11 @@ ActionBar.OnNavigationListener {
         		SharedPreferences settings2 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
         		String lastUpDate = settings2.getString("date", "nothingexists");
         		Date lastUpdated = null;
-
+        		   final String[] libraries = {
+        	            "Powell Library", "Young Research Library",
+        	            "Science and Engineering Library", "Music Library", "Management Library", "Arts Library", "Law Library",
+        	            "Biomedical Library"
+        	    };
         		if(lastUpDate.equalsIgnoreCase("nothingexists"))
         		{
         			SharedPreferences settings3 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
@@ -172,6 +176,15 @@ ActionBar.OnNavigationListener {
             		editor3.putString("date", today.toString());
             		editor3.apply();
             		diffInDays = 8;
+            		for(int i = 0 ; i < 8 ; i ++)
+            		{
+            			SharedPreferences settings31 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+                		SharedPreferences.Editor editor31 = settings31.edit();
+                		editor31.putString(String.valueOf(i), libraries[i]);
+                		editor31.putString( libraries[i],String.valueOf(i));
+                		editor31.apply();
+            		}
+            		
         		}
         		else
         		{

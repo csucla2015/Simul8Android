@@ -49,7 +49,8 @@ public class ScreenSlidePageFragment extends Fragment {
 	private static final String tg = "nitin";
 	View rootView;
     public static final String ARG_PAGE = "page";
-
+    public static String[] headers;
+    public static String[] strings;
    
     private int mPageNumber;
 
@@ -83,9 +84,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		System.out.println("here");
 		headerView = new View(getActivity());	
 		headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
-		String[] strings = getResources().getStringArray(R.array.list_content);
+	    strings = getResources().getStringArray(R.array.list_content);
 		strings[0]= "Hours : /n Monday : 7:30 am - 11:00 pm \n Tuesday : 7:30 am - 11:00 pm \n Wednesday : 7:30 am - 11:00 pm \n Thursday 7:30 am - 11:00 pm \n Friday 7:30 am - 11:00 pm";
-		String[] headers = new String[10];
+		headers = new String[10];
 		headers[2] = "Hours";
 		headers[4] = "Laptop Availability";
 		headers[6] = "Contact";
@@ -104,117 +105,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		strings[5] = "";
 		strings[7] = "";
 		strings[9] = "";
-		if(mPageNumber == 2)
-		{	
-			strings[6] = "(310) 825 1938";
+	    SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
 
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("College Library", null);
-			strings[2]= newhours;
-
-			rootView.setBackgroundResource(R.drawable.powell);
-			headers[0] =  getString(R.string.powell);
-			String laptops = settings1.getString("Powell Library Laptops",null);
-			strings[4] = laptops ;
-			strings[8] = "http://maps.google.com/?q=Powell+Library";
-
-		}
-		else if(mPageNumber == 1)
-		{	
-			strings[6] = "(310) 825-4732";
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("Research Library", null);
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.yrlnew);
-			headers[0] =  getString(R.string.yrl);
-			String laptops = settings1.getString("Research Library Laptops",null);
-			strings[4] = laptops ;
-			strings[8] = "http://maps.google.com/?q=UCLA Charles E. Young Research Library";
-
-		}
-		else if(mPageNumber == 3)
-		{	
-			strings[8] = "http://maps.google.com/?q=Rosenfeld Library";
-
-			strings[6] = "(310) 825-3138";
-			strings[4] = "Laptops Not Available" ;
-
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("Management Library", null);
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.mgmt);
-			headers[0] =  getString(R.string.mgmt);
-		}
-		else if(mPageNumber == 4)
-		{	
-			strings[6] = "(310) 825-4951";
-
-			
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("SEL Eng & Math Sci", null);
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.seml);
-			headers[0] =  getString(R.string.seml);
-			String laptops = settings1.getString("SEL / Boelter Laptops",null);
-			strings[4] = laptops ;
-			strings[8] = "http://maps.google.com/?q=Science and Engineering Library/ Engineering and Mathematical Sciences";
-		}	
-		else if(mPageNumber == 0)
-		{	
-			strings[6] = "(310) 825-4882";
-
-			strings[8] = "http://maps.google.com/?q=Shoenberg Music Bldg";
-
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("Music Library", null);
-    		String laptops = settings1.getString("Music Library Laptops",null);
-			strings[4] = laptops ;
-
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.music);
-			headers[0] =  getString(R.string.music);
-		}
-		else if(mPageNumber == 5)
-		{	
-			strings[6] = "(310) 206-5425";
-			strings[8] = "http://maps.google.com/?q=Arts Library";
-
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("Arts Library", null);
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.arts);
-			headers[0] =  getString(R.string.arts);
-			String laptops = settings1.getString("Arts Library Laptops",null);
-			strings[4] = laptops ;
-		}
-		else if(mPageNumber == 6)
-		{	
-			strings[6] = "(310) 825-6414";
-			strings[8] = "http://maps.google.com/?q=Hugh and Hazel Darling Law Library";
-
-			
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("Arts Library", null);
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.law);
-			headers[0] =  getString(R.string.law);
-			strings[4] = "Laptops Not Available" ;
-
-		}
-		else if(mPageNumber == 7)
-		{	
-			strings[6] = "(310) 825-4904";
-			strings[8] = "http://maps.google.com/?q=UCLA Louise M. Darling Biomedical Library";
-
-			
-			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
-    		String newhours = settings1.getString("Arts Library", null);
-			strings[2]= newhours;
-			rootView.setBackgroundResource(R.drawable.biomed);
-			headers[0] =  getString(R.string.biomed);
-			strings[4] = "Laptops Not Available" ;
-
-		}
+		setLibraryInfo(settings1.getString(String.valueOf(mPageNumber), "yolo"));
 		// Get the screen width
 		final int screenWidth = ImageUtils.getScreenWidth(getActivity());
 
@@ -243,4 +136,131 @@ public class ScreenSlidePageFragment extends Fragment {
     public int getPageNumber() {
         return mPageNumber;
     }
+    public void setLibraryInfo(String name)
+    {
+    	if(name.equalsIgnoreCase("Powell Library"))
+		{	
+			strings[6] = "(310) 825 1938";
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("College Library", null);
+			strings[2]= newhours;
+
+			rootView.setBackgroundResource(R.drawable.powell);
+			headers[0] =  getString(R.string.powell);
+			String laptops = settings1.getString("Powell Library Laptops",null);
+			strings[4] = laptops ;
+			strings[8] = "http://maps.google.com/?q=Powell+Library";
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+
+		}
+		else if(name.equalsIgnoreCase("Young Research Library"))
+		{	
+			strings[6] = "(310) 825-4732";
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Research Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.yrlnew);
+			headers[0] =  getString(R.string.yrl);
+			String laptops = settings1.getString("Research Library Laptops",null);
+			strings[4] = laptops ;
+			strings[8] = "http://maps.google.com/?q=UCLA Charles E. Young Research Library";
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+		}
+		else if(name.equalsIgnoreCase("Management Library"))
+		{	
+			strings[8] = "http://maps.google.com/?q=Rosenfeld Library";
+
+			strings[6] = "(310) 825-3138";
+			strings[4] = "Laptops Not Available" ;
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Management Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.mgmt);
+			//headers[0] =  getString(R.string.mgmt);
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+		}
+		else if(name.equalsIgnoreCase("Science and Engineering Library"))
+		{	
+			strings[6] = "(310) 825-4951";
+
+			
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("SEL Eng & Math Sci", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.seml);
+			headers[0] =  getString(R.string.seml);
+			String laptops = settings1.getString("SEL / Boelter Laptops",null);
+			strings[4] = laptops ;
+			strings[8] = "http://maps.google.com/?q=Science and Engineering Library/ Engineering and Mathematical Sciences";
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+		}	
+		else if(name.equalsIgnoreCase("Music Library"))
+		{	
+			strings[6] = "(310) 825-4882";
+
+			strings[8] = "http://maps.google.com/?q=Shoenberg Music Bldg";
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Music Library", null);
+    		String laptops = settings1.getString("Music Library Laptops",null);
+			strings[4] = laptops ;
+
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.music);
+			headers[0] =  getString(R.string.music);
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+		}
+		else if(name.equalsIgnoreCase("Arts Library"))
+		{	
+			strings[6] = "(310) 206-5425";
+			strings[8] = "http://maps.google.com/?q=Arts Library";
+
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Arts Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.arts);
+			headers[0] =  getString(R.string.arts);
+			String laptops = settings1.getString("Arts Library Laptops",null);
+			strings[4] = laptops ;
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+		}
+		else if(name.equalsIgnoreCase("Law Library"))
+		{	
+			strings[6] = "(310) 825-6414";
+			strings[8] = "http://maps.google.com/?q=Hugh and Hazel Darling Law Library";
+
+			
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Arts Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.law);
+			headers[0] =  getString(R.string.law);
+			strings[4] = "Laptops Not Available" ;
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+		}
+		else if(name.equalsIgnoreCase("Biomedical Library"))
+		{	
+			strings[6] = "(310) 825-4904";
+			strings[8] = "http://maps.google.com/?q=UCLA Louise M. Darling Biomedical Library";
+
+			
+			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+    		String newhours = settings1.getString("Arts Library", null);
+			strings[2]= newhours;
+			rootView.setBackgroundResource(R.drawable.biomed);
+			headers[0] =  getString(R.string.biomed);
+			strings[4] = "Laptops Not Available" ;
+			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+
+		}
+    }
+    
 }
