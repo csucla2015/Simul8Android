@@ -110,8 +110,16 @@ ActionBar.OnNavigationListener {
 			startActivity(i);
 			finish();
     	}
+    	case R.id.refresh:
+    	{
+    		Intent i = new Intent(ListViewDraggingAnimation.this,ScreenSlideActivity.class);
+			startActivity(i);
+			finish();
+    	}
+    	
+    	
     	default:
-    		return super.onOptionsItemSelected(item);
+    		return true;
     	}
         
     }

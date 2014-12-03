@@ -17,6 +17,9 @@
 package com.example.android.animationsdemo;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.npi.blureffect.Blur;
 import com.npi.blureffect.ImageUtils;
@@ -91,7 +94,7 @@ public class ScreenSlidePageFragment extends Fragment {
 		headers[2] = "Hours";
 		headers[4] = "Laptop Availability";
 		headers[6] = "Contact";
-		headers[8] = "Room Reservations";
+		headers[8] = "Directions";
 		strings[0] = "Open Now";
 		strings[8] = "http://maps.google.com/?q=Powell+Library";
 
@@ -139,6 +142,23 @@ public class ScreenSlidePageFragment extends Fragment {
     }
     public void setLibraryInfo(String name)
     {
+    	DateFormat dateFormat = new SimpleDateFormat("hh a");
+    	Date date = new Date();
+    	 String datestring = dateFormat.format(date);
+     	Log.v("meet1", "date is"+datestring);
+
+    	 String backdatestring = datestring;
+
+    	 int index = datestring.indexOf(' ');
+    	 datestring = datestring.substring(0,index);
+    
+    	 String ampm = backdatestring.substring(index+1, backdatestring.length());
+     	DateFormat dateFormat1 = new SimpleDateFormat("E");
+     	Date date1 = new Date();
+     	 String day = dateFormat1.format(date1);
+     	 Log.v("meet1", "day" + day);
+    	Log.v("meet1", "date is"+datestring);
+    	Log.v("meet1", "am or pm is"+ampm+ " " + String.valueOf(ampm.length()));
     	if(name.equalsIgnoreCase("Powell Library"))
 		{	
 			strings[6] = "(310) 825 1938";
@@ -146,6 +166,11 @@ public class ScreenSlidePageFragment extends Fragment {
 			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
     		String newhours = settings1.getString("College Library", null);
 			strings[2]= newhours;
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
 
 			rootView.setBackgroundResource(R.drawable.powell);
 			headers[0] =  getString(R.string.powell);
@@ -158,6 +183,7 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Young Research Library"))
 		{	
+			
 			strings[6] = "(310) 825-4732";
 			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
     		String newhours = settings1.getString("Research Library", null);
@@ -168,6 +194,12 @@ public class ScreenSlidePageFragment extends Fragment {
 			strings[4] = laptops ;
 			strings[8] = "http://maps.google.com/?q=UCLA Charles E. Young Research Library";
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 
 		}
 		else if(name.equalsIgnoreCase("Management Library"))
@@ -183,6 +215,12 @@ public class ScreenSlidePageFragment extends Fragment {
 			rootView.setBackgroundResource(R.drawable.mgmt);
 			//headers[0] =  getString(R.string.mgmt);
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 		}
 		else if(name.equalsIgnoreCase("Science and Engineering Library"))
 		{	
@@ -198,6 +236,13 @@ public class ScreenSlidePageFragment extends Fragment {
 			strings[4] = laptops ;
 			strings[8] = "http://maps.google.com/?q=Science and Engineering Library/ Engineering and Mathematical Sciences";
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			Log.v("meet1", newhours + " " + ampm + " " + datestring + " " + day);
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 
 		}	
 		else if(name.equalsIgnoreCase("Music Library"))
@@ -215,6 +260,12 @@ public class ScreenSlidePageFragment extends Fragment {
 			rootView.setBackgroundResource(R.drawable.music);
 			headers[0] =  getString(R.string.music);
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 
 		}
 		else if(name.equalsIgnoreCase("Arts Library"))
@@ -230,6 +281,12 @@ public class ScreenSlidePageFragment extends Fragment {
 			String laptops = settings1.getString("Arts Library Laptops",null);
 			strings[4] = laptops ;
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 
 		}
 		else if(name.equalsIgnoreCase("Law Library"))
@@ -245,6 +302,12 @@ public class ScreenSlidePageFragment extends Fragment {
 			headers[0] =  getString(R.string.law);
 			strings[4] = "Laptops Not Available" ;
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 
 		}
 		else if(name.equalsIgnoreCase("Biomedical Library"))
@@ -260,8 +323,106 @@ public class ScreenSlidePageFragment extends Fragment {
 			headers[0] =  getString(R.string.biomed);
 			strings[4] = "Laptops Not Available" ;
 			headers[0] = settings1.getString(String.valueOf(mPageNumber), "yolo");
+			if(isClosed(newhours, ampm, datestring, day))
+			{
+				strings[0] = "Closed";
+				Log.v("meet1","in here");
+			}
+
 
 		}
     }
+    boolean isClosed(String hours, String ampm, String datestring, String day)
+    {
+    	String newhours = "";
+    	if(day.equalsIgnoreCase("Mon") || day.equalsIgnoreCase("Tue") || day.equalsIgnoreCase("Wed") || day.equalsIgnoreCase("Thur"))
+    	{	
+	    	int index = 0;
+	    	if(ampm.equalsIgnoreCase("PM"))
+	    		index = hours.indexOf("PM");
+	    	else
+	    		index = hours.indexOf("AM");
+	    	Log.v("meet1", "index is "+ String.valueOf(index));
+		    newhours = hours.substring(index-6,index);
+			Log.v("meet1","new hrs is " + newhours);
+			index = newhours.indexOf(':');
+			newhours = newhours.substring(index-2,index);
+			newhours = newhours.trim();
+			Log.v("meet1","d1ate is "+newhours+" "+String.valueOf(newhours.length()));
+    	}
+    	if(day.equalsIgnoreCase("Fri"))
+    	{
+    		int tempind = hours.indexOf("Friday");
+    		hours = hours.substring(tempind);
+    				
+    		int index = 0;
+	    	if(ampm.equalsIgnoreCase("PM"))
+	    		index = hours.indexOf("PM");
+	    	else
+	    		index = hours.indexOf("AM");
+	    	Log.v("meet1", "index is "+ String.valueOf(index));
+			newhours = hours.substring(index-6,index);
+			Log.v("meet1","new hrs is " + newhours);
+			index = newhours.indexOf(':');
+			newhours = newhours.substring(index-2,index);
+			newhours = newhours.trim();
+			Log.v("meet1","d1ate is "+newhours+" "+String.valueOf(newhours.length()));
+
+    		
+    	}	
+    	if(day.equalsIgnoreCase("Sat"))
+    	{
+    		int tempind = hours.indexOf("Saturday");
+    		hours = hours.substring(tempind);
+    				
+    		int index = 0;
+	    	if(ampm.equalsIgnoreCase("PM"))
+	    		index = hours.indexOf("PM");
+	    	else
+	    		index = hours.indexOf("AM");
+	    	Log.v("meet1", "index is "+ String.valueOf(index));
+			newhours = hours.substring(index-6,index);
+			Log.v("meet1","new hrs is " + newhours);
+			index = newhours.indexOf(':');
+			newhours = newhours.substring(index-2,index);
+			newhours = newhours.trim();
+			Log.v("meet1","d1ate is "+newhours+" "+String.valueOf(newhours.length()));
+    	}
+    	if(day.equalsIgnoreCase("Sun"))
+    	{
+    		int tempind = hours.indexOf("Sunday");
+    		hours = hours.substring(tempind);
+    				
+    		int index = 0;
+	    	if(ampm.equalsIgnoreCase("PM"))
+	    		index = hours.indexOf("PM");
+	    	else
+	    		index = hours.indexOf("AM");
+	    	Log.v("meet1", "index is "+ String.valueOf(index));
+			newhours = hours.substring(index-6,index);
+			Log.v("meet1","new hrs is " + newhours);
+			index = newhours.indexOf(':');
+			newhours = newhours.substring(index-2,index);
+			newhours = newhours.trim();
+			Log.v("meet1","d1ate is "+newhours+" "+String.valueOf(newhours.length()));
+    	}
+		int close = Integer.parseInt(newhours);
+		int current = Integer.parseInt(datestring);
+		Log.v("meet1","close and cur"+ " " + String.valueOf(close)+ " " + String.valueOf(current));
+		if(current>=close && ampm.equalsIgnoreCase("PM"))
+		{
+			strings[0] = "Closed";
+			Log.v("meet1","in here1");
+			return true;
+		}
+		if(current<=close && ampm.equalsIgnoreCase("AM"))
+		{
+			strings[0] = "Closed";
+			Log.v("meet1","in here1");
+			return true;
+		}
+    	return false;
+    }
+    
     
 }

@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
 					// No image found => let's generate it!
 					BitmapFactory.Options options = new BitmapFactory.Options();
 					options.inSampleSize = 2;
-					Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.image1, options);
+					Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.yrl, options);
 					Bitmap newImg = Blur.fastblur(MainActivity.this, image, 20);
 					ImageUtils.storeImage(newImg, blurredImage);
 					runOnUiThread(new Runnable() {

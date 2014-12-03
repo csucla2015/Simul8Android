@@ -7,14 +7,14 @@
         android:id="@+id/normal_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/image1" />
+        android:src="@drawable/yrl" />
 
     <com.npi.blureffect.TopCenterImageView
         android:id="@+id/blurred_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
-        android:src="@drawable/image1" />
+        android:src="@drawable/yrl" />
 
     <ListView
         android:id="@+id/list"

@@ -24,8 +24,10 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -35,11 +37,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class SplashScreen extends Activity {
 	MyTask objMyTask;
+	final Context context = this;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -47,7 +51,7 @@ public class SplashScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splash);
-		MyTask mytask = new MyTask();
+			MyTask mytask = new MyTask();
 		mytask.execute();					
 			
 	}
@@ -55,35 +59,13 @@ public class SplashScreen extends Activity {
 	
 	class MyTask extends AsyncTask<Void, Integer, Void> {
 
-		Dialog dialog;
-		ProgressBar progressBar;
 		TextView tvLoading,tvPer;
 		Button btnCancel;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = new Dialog(SplashScreen.this);
-			dialog.setCancelable(false);
-			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.setContentView(R.layout.progressdialog);
-
-			progressBar = (ProgressBar) dialog.findViewById(R.id.progressBar1);
-			tvLoading = (TextView) dialog.findViewById(R.id.tv1);
-			tvPer = (TextView) dialog.findViewById(R.id.tvper);
-			btnCancel = (Button) dialog.findViewById(R.id.btncancel);
-
-			btnCancel.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					objMyTask.cancel(true);
-					dialog.dismiss();
-				}
-			});
-
-			dialog.show();
-		}
+					}
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -300,29 +282,60 @@ public class SplashScreen extends Activity {
 		}
 
 
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			super.onProgressUpdate(values);
-			progressBar.setProgress(values[0]);
-			tvLoading.setText("Loading...  " + values[0] + " %");
-			tvPer.setText(values[0]+" %");
-		}
-
+		
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
+			
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+					context);
+            alertDialog.setTitle("Welcome"); // your dialog title 
+            alertDialog.setMessage("Use slide gestures to navigate to the library of your choice. Change the order by navigating to the settings options in the menu"); // a message above the buttons
+            alertDialog.setIcon(R.drawable.ic_launcher); // the icon besides the title you have to change it to the icon/image you have. 
+            alertDialog
+            .setMessage("Use slide gestures to navigate to the library of your choice. Change the order by navigating to the settings options in the menu") // a message above the buttons
+			.setCancelable(false)
+			.setPositiveButton("Ok! Got it..",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					dialog.cancel();
+					Intent i = new Intent(SplashScreen.this, ScreenSlideActivity.class);
+					startActivity(i);
+					finish();					
+				
+				}
+			  });
+			// create alert dialog
+			AlertDialog alertDialog1 = alertDialog.create();
 
-			dialog.dismiss();
-			Intent i = new Intent(SplashScreen.this, ScreenSlideActivity.class);
-			startActivity(i);
-			finish();
-			//AlertDialog alert = new AlertDialog.Builder(MainActivity.this)
-					//.create();
+            alertDialog1.show();
+            /*
 
-			//alert.setTitle("Completed!!!");
-			//alert.setMessage("Your Task is Completed SuccessFully!!!");
-			//alert.setButton("Dismiss", new DialogInterface.OnClickListener() {
+			final Dialog dialog = new Dialog(context);
+			dialog.setContentView(R.layout.custom_dialog);
+			dialog.setTitle("Title...");
+			// set the custom dialog components - text, image and button
+			TextView text = (TextView) dialog.findViewById(R.id.text);
+			text.setText("Android custom dialog example!");
+			ImageView image = (ImageView) dialog.findViewById(R.id.image);
+			image.setImageResource(R.drawable.ic_launcher);
 
+			Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+			// if button is clicked, close the custom dialog
+			dialogButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+
+					Intent i = new Intent(SplashScreen.this, ScreenSlideActivity.class);
+					startActivity(i);
+					finish();
+				}
+			});
+
+			dialog.show();
+	*/
 				
 			
 		}

@@ -24,7 +24,9 @@ import com.example.android.animationsdemo.R;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -64,16 +66,40 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     TextView textView = (TextView) rowView.findViewById(R.id.textView1);
     TextView textView3 = (TextView) rowView.findViewById(R.id.textView3);
     TextView textView4 = (TextView) rowView.findViewById(R.id.textView4);
-    
-    if(headers[position].equalsIgnoreCase("Laptop Availibility"))
-    {	
-	  //  FakeNetLoader fl = new FakeNetLoader();
-	  //	fl.execute("http://dev-mobileapi.stashd.org:8000/mwf_laptops?no_server_init");
-    }
+    ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView1);
+	imageView.setVisibility(View.GONE);
+
     Log.v("meet","Value position is"+String.valueOf(position));
     Log.v("meet","Value is"+values[position]);
-    if(headers[position].equalsIgnoreCase("Room Reservations"))
+    if(headers[position].equalsIgnoreCase("Contact"))
+    {
+        final String phonenum = values[position];
+    	imageView.setVisibility(View.VISIBLE);
+    	imageView.setImageResource(R.drawable.dialer);
+    	imageView.setOnClickListener(new View.OnClickListener() {
+    	    @Override
+    	    public void onClick(View v) {
+    	    	Intent intent = new Intent(Intent.ACTION_DIAL);
+    	    	intent.setData(Uri.parse("tel:"+phonenum));
+    	    	context.startActivity(intent); 
+    	    }
+    	});
+    }
+    if(headers[position].equalsIgnoreCase("Directions"))
     {	
+    final String directions = values[position];
+
+    imageView.setImageResource(R.drawable.maps);
+	imageView.setVisibility(View.VISIBLE);
+	imageView.setOnClickListener(new View.OnClickListener(){
+	    public void onClick(View v){
+	        Intent intent = new Intent();
+	        intent.setAction(Intent.ACTION_VIEW);
+	        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+	        intent.setData(Uri.parse(directions));
+	        context.startActivity(intent);
+	    }
+	});
     textView.setText( Html.fromHtml("<a href=\""+values[position]+"\">Click here for directions</a>"));
     textView. setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -108,7 +134,11 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     	l1.setPadding(10, 10, 10, 10);
     	textView1.setTextSize(42);
     	textView.setTextSize(28);
-    	textView.setTextColor(Color.parseColor("#88ff88"));
+    	if(textView.getText().equals("Open Now"))
+    		textView.setTextColor(Color.parseColor("#88ff88"));
+    	else
+    		textView.setTextColor(Color.parseColor("#FF4C4C"));
+
     	textView4.setVisibility(View.GONE);
 
     }
