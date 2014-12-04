@@ -73,6 +73,9 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     Log.v("meet","Value is"+values[position]);
     if(headers[position].equalsIgnoreCase("Contact"))
     {
+        imageView.setPadding(10,0,0,0);
+
+    	textView.setVisibility(View.GONE);
         final String phonenum = values[position];
     	imageView.setVisibility(View.VISIBLE);
     	imageView.setImageResource(R.drawable.dialer);
@@ -88,9 +91,13 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     if(headers[position].equalsIgnoreCase("Directions"))
     {	
     final String directions = values[position];
-
+    textView.setVisibility(View.GONE);
+    imageView.setPadding(0,10,0,0);
     imageView.setImageResource(R.drawable.maps);
 	imageView.setVisibility(View.VISIBLE);
+	imageView.getLayoutParams().height = 115;
+	imageView.getLayoutParams().width = 125;
+	imageView.requestLayout();
 	imageView.setOnClickListener(new View.OnClickListener(){
 	    public void onClick(View v){
 	        Intent intent = new Intent();

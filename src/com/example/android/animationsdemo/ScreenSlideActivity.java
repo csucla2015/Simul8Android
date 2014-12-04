@@ -129,17 +129,17 @@ ActionBar.OnNavigationListener  {
     public boolean onCreateOptionsMenu(Menu menu) {
         
     	super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
+       // getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
 
-        menu.findItem(R.id.action_previous).setEnabled(mPager.getCurrentItem() > 0);
 
         // Add either a "next" or "finish" button to the action bar, depending on which page
         // is currently selected.
+        /*
         MenuItem item = menu.add(Menu.NONE, R.id.action_next, Menu.NONE,
                 (mPager.getCurrentItem() == mPagerAdapter.getCount() - 1)
                         ? R.string.action_finish
                         : R.string.action_next);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);*/
         MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.activity_main_actions, menu);
     	return super.onCreateOptionsMenu(menu);
