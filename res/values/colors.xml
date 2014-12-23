@@ -7,6 +7,9 @@
     <color name="dark_gray">#999999</color>
     <color name="light_gray">#B4B4B4</color>
     <color name="navy">#4C566C</color>
+    <color name="color_preloader_start">#000000</color>
+    <color name="color_preloader_center">#000000</color>
+    <color name="color_preloader_end">#ff56a9c7</color>
     <color name="button_gray">#4d4c4d</color>
     <color name = "trans">#99333333</color>
     <color name="bruin_blue">#3e7ea2</color>

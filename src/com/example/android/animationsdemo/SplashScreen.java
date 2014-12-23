@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,6 +31,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +46,8 @@ import android.widget.TextView;
 
 public class SplashScreen extends Activity {
 	MyTask objMyTask;
+	private ProgressBar bar;
+
 	final Context context = this;
 
 	/** Called when the activity is first created. */
@@ -51,8 +56,39 @@ public class SplashScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splash);
+	    bar = (ProgressBar) this.findViewById(R.id.progressBar);
+
+		if(haveInternet(context) == false)
+		{
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+					context);
+            alertDialog.setTitle("No Internet Connection"); // your dialog title 
+            alertDialog.setMessage("The current version of the app can not be used without an internet connection");
+            alertDialog.setIcon(R.drawable.ic_launcher); // the icon besides the title you have to change it to the icon/image you have. 
+            alertDialog
+            .setMessage("The current version of the app can not be used without an internet connection") // a message above the buttons
+			.setCancelable(false)
+			.setPositiveButton("Ok! Got it..",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					dialog.cancel();
+				
+					finish();					
+				
+				}
+			  });
+			// create alert dialog
+			AlertDialog alertDialog1 = alertDialog.create();
+
+            alertDialog1.show();
+
+		}
+		else
+		{	
 			MyTask mytask = new MyTask();
-		mytask.execute();					
+		mytask.execute();	
+		}
 			
 	}
 	
@@ -64,12 +100,13 @@ public class SplashScreen extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			super.onPreExecute();
+	        bar.setVisibility(View.VISIBLE);
+
 					}
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			InputStream is = null;
+						InputStream is = null;
 			JSONObject jObj = null;
 			String json = "";
 			Log.v("try","try");
@@ -124,7 +161,7 @@ public class SplashScreen extends Activity {
     		}
 			Log.v("meet", "date " + String.valueOf(diffInDays));
 
-			if(diffInDays > 7)
+			if(diffInDays >= 0 )
 			{	
 				SharedPreferences settings3 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
         		SharedPreferences.Editor editor3 = settings3.edit();
@@ -163,8 +200,8 @@ public class SplashScreen extends Activity {
 				} 
 			    //JSON Parsking
 				Log.v("try1","try1");
-
-				String json1 = json.substring(2,3739);
+				int len = json.length();
+				String json1 = json.substring(2,len-1);
 				int ind = json.indexOf("[");
 				int ind1 = json.indexOf("]");
 				Log.v("Pos", String.valueOf(ind)+ String.valueOf(ind1));
@@ -267,7 +304,13 @@ public class SplashScreen extends Activity {
 		            		SharedPreferences settings1 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
 		            		String newhours = settings1.getString(libName+ " Laptops", null);
 		            		Log.v("meet", "newhours"+libName);
+		            		DateFormat dateFormat = new SimpleDateFormat("E yyyy.MM.dd ',' hh:mm:ss a zzz");
+		                	Date date = new Date();
+		                	String datestring = dateFormat.format(date);
+		            		editor.putString("asof", datestring);
+		            		editor.apply();
 
+		                 	Log.v("meet1", "date is"+datestring);
 		            		Log.v("meet", "newhours"+newhours);
 
 		            	}	
@@ -285,6 +328,8 @@ public class SplashScreen extends Activity {
 		
 		@Override
 		protected void onPostExecute(Void result) {
+	        bar.setVisibility(View.GONE);
+
 			super.onPostExecute(result);
 			
 			AlertDialog.Builder alertDialog = new AlertDialog.Builder(
@@ -340,5 +385,19 @@ public class SplashScreen extends Activity {
 			
 		}
 	}
+	public static boolean haveInternet(Context ctx) {
 
+	    NetworkInfo info = (NetworkInfo) ((ConnectivityManager) ctx
+	            .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+
+	    if (info == null || !info.isConnected()) {
+	        return false;
+	    }
+	    if (info.isRoaming()) {
+	        // here is the roaming option you can change it if you want to
+	        // disable internet while roaming, just return false
+	        return false;
+	    }
+	    return true;
+	}
 }

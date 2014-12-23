@@ -5,7 +5,14 @@
     
     <!-- Location Found -->
    
-    
+    	<item android:id="@+id/settings"
+          android:icon="@drawable/ic_action_settings"
+          android:title="Settings"
+          android:showAsAction="always" />	
+       <item android:id="@+id/refresh"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="Refresh"
+          android:showAsAction="always" />	
     <!-- Help -->
     <item android:id="@+id/powell"
           android:icon="@drawable/ic_action_help"
@@ -51,14 +58,7 @@
           android:title="Biomedical Library"
           android:showAsAction="never" />
        
-     <item android:id="@+id/settings"
-          android:icon="@drawable/ic_action_refresh"
-          android:title="Settings"
-          android:showAsAction="never" />
-     
-       <item android:id="@+id/refresh"
-          android:icon="@drawable/ic_action_refresh"
-          android:title="Refresh"
-          android:showAsAction="never" />
+   
+    
            
 </menu>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 The Android Open Source Project
+* Copyright 2012 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -106,7 +107,7 @@ ActionBar.OnNavigationListener  {
         actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
 		// Enabling Spinner dropdown navigation
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		//actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
@@ -128,7 +129,7 @@ ActionBar.OnNavigationListener  {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
-    	super.onCreateOptionsMenu(menu);
+    	//super.onCreateOptionsMenu(menu);
        // getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
 
 
@@ -166,6 +167,12 @@ ActionBar.OnNavigationListener  {
                 // will do nothing.
                 mPager.setCurrentItem(mPager.getCurrentItem() + 1);
                 return true;
+            case R.id.refresh:
+        	{
+        		MyTask mytask = new MyTask();
+        		mytask.execute();
+        		
+        	}
         }
         SharedPreferences settings1 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
 
@@ -228,12 +235,7 @@ ActionBar.OnNavigationListener  {
 			return true;
 			//finish();
     	}
-    	case R.id.refresh:
-    	{
-    		MyTask mytask = new MyTask();
-    		mytask.execute();
-    		
-    	}
+    	
     	default:
             return true;
     	}
@@ -272,8 +274,7 @@ ActionBar.OnNavigationListener  {
 
 		Dialog dialog;
 		ProgressBar progressBar;
-		TextView tvLoading,tvPer;
-		Button btnCancel;
+		
 
 		@Override
 		protected void onPreExecute() {
@@ -284,18 +285,8 @@ ActionBar.OnNavigationListener  {
 			dialog.setContentView(R.layout.progressdialog);
 
 			progressBar = (ProgressBar) dialog.findViewById(R.id.progressBar1);
-			tvLoading = (TextView) dialog.findViewById(R.id.tv1);
-			tvPer = (TextView) dialog.findViewById(R.id.tvper);
-			btnCancel = (Button) dialog.findViewById(R.id.btncancel);
 
-			btnCancel.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					objMyTask.cancel(true);
-					dialog.dismiss();
-				}
-			});
+			
 
 			dialog.show();
 		}
@@ -383,8 +374,8 @@ ActionBar.OnNavigationListener  {
 				} 
 			    //JSON Parsking
 				Log.v("try1","try1");
-
-				String json1 = json.substring(2,3739);
+				int len = json.length();
+				String json1 = json.substring(2,len-1);
 				int ind = json.indexOf("[");
 				int ind1 = json.indexOf("]");
 				Log.v("Pos", String.valueOf(ind)+ String.valueOf(ind1));
@@ -487,7 +478,10 @@ ActionBar.OnNavigationListener  {
 		            		SharedPreferences settings1 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
 		            		String newhours = settings1.getString(libName+ " Laptops", null);
 		            		Log.v("meet", "newhours"+libName);
-
+		            		DateFormat dateFormat = new SimpleDateFormat("E yyyy.MM.dd ',' hh:mm:ss a zzz");
+		                	Date date = new Date();
+		                	String datestring = dateFormat.format(date);
+		            		editor.putString("asof", datestring);
 		            		Log.v("meet", "newhours"+newhours);
 
 		            	}	
@@ -502,13 +496,7 @@ ActionBar.OnNavigationListener  {
 		}
 
 
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			super.onProgressUpdate(values);
-			progressBar.setProgress(values[0]);
-			tvLoading.setText("Loading...  " + values[0] + " %");
-			tvPer.setText(values[0]+" %");
-		}
+		
 
 		@Override
 		protected void onPostExecute(Void result) {

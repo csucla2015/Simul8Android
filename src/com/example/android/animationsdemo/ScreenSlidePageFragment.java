@@ -21,16 +21,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.npi.blureffect.Blur;
-import com.npi.blureffect.ImageUtils;
 import com.npi.blureffect.MySimpleArrayAdapter;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,13 +48,14 @@ public class ScreenSlidePageFragment extends Fragment {
 	private ImageView mNormalImage;
 	private float alpha;
 	private View headerView;
-	private static final int TOP_HEIGHT = 670;
+	private static int TOP_HEIGHT = 800;
 	private static final String tg = "nitin";
 	View rootView;
     public static final String ARG_PAGE = "page";
     public static String[] headers;
     public static String[] strings;
-   
+    int width ;
+    int height;
     private int mPageNumber;
 
     public static ScreenSlidePageFragment create(int pageNumber) {
@@ -72,7 +73,14 @@ public class ScreenSlidePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
     	Log.v("meet1","we are in fragments");
         super.onCreate(savedInstanceState);
-        
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size.x;
+        height = size.y;
+        Log.v("meet2", "height is "+String.valueOf(height));
+	    TOP_HEIGHT = height-height/3*2;
+	        
         mPageNumber = getArguments().getInt(ARG_PAGE);
         System.out.println(mPageNumber);
     }
@@ -87,7 +95,7 @@ public class ScreenSlidePageFragment extends Fragment {
 		//mNormalImage = (ImageView) rootView.findViewById(R.id.normal_imagem);
 		System.out.println("here");
 		headerView = new View(getActivity());	
-		headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+		//headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
 	    strings = getResources().getStringArray(R.array.list_content);
 		strings[0]= "Hours : /n Monday : 7:30 am - 11:00 pm \n Tuesday : 7:30 am - 11:00 pm \n Wednesday : 7:30 am - 11:00 pm \n Thursday 7:30 am - 11:00 pm \n Friday 7:30 am - 11:00 pm";
 		headers = new String[10];
@@ -113,7 +121,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
 		setLibraryInfo(settings1.getString(String.valueOf(mPageNumber), "yolo"));
 		// Get the screen width
-		final int screenWidth = ImageUtils.getScreenWidth(getActivity());
+		//final int screenWidth = ImageUtils.getScreenWidth(getActivity());
 
 		// Try to find the blurred image
 	
@@ -161,17 +169,22 @@ public class ScreenSlidePageFragment extends Fragment {
     	Log.v("meet1", "am or pm is"+ampm+ " " + String.valueOf(ampm.length()));
     	if(name.equalsIgnoreCase("Powell Library"))
 		{	
+
 			strings[6] = "(310) 825 1938";
+			TOP_HEIGHT = height-height/100*55 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
 
 			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
     		String newhours = settings1.getString("College Library", null);
 			strings[2]= newhours;
+			/*
 			if(isClosed(newhours, ampm, datestring, day))
 			{
 				strings[0] = "Closed";
 				Log.v("meet1","in here");
 			}
-
+			*/
+			 
 			rootView.setBackgroundResource(R.drawable.powell);
 			headers[0] =  getString(R.string.powell);
 			String laptops = settings1.getString("Powell Library Laptops",null);
@@ -183,7 +196,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Young Research Library"))
 		{	
-			
+    	    TOP_HEIGHT = height-height/5*3 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[6] = "(310) 825-4732";
 			SharedPreferences settings1 = getActivity().getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
     		String newhours = settings1.getString("Research Library", null);
@@ -204,6 +219,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Management Library"))
 		{	
+    	    TOP_HEIGHT = height-height/5*3 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[8] = "http://maps.google.com/?q=Rosenfeld Library";
 
 			strings[6] = "(310) 825-3138";
@@ -224,6 +242,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Science and Engineering Library"))
 		{	
+			TOP_HEIGHT = height-height/10*7 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[6] = "(310) 825-4951";
 
 			
@@ -247,6 +268,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}	
 		else if(name.equalsIgnoreCase("Music Library"))
 		{	
+			TOP_HEIGHT = height-height/100*55 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[6] = "(310) 825-4882";
 
 			strings[8] = "http://maps.google.com/?q=Shoenberg Music Bldg";
@@ -270,6 +294,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Arts Library"))
 		{	
+			TOP_HEIGHT = height-height/100*55 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[6] = "(310) 206-5425";
 			strings[8] = "http://maps.google.com/?q=Arts Library";
 
@@ -291,6 +318,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Law Library"))
 		{	
+			TOP_HEIGHT = height-height/100*55  + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[6] = "(310) 825-6414";
 			strings[8] = "http://maps.google.com/?q=Hugh and Hazel Darling Law Library";
 
@@ -312,6 +342,9 @@ public class ScreenSlidePageFragment extends Fragment {
 		}
 		else if(name.equalsIgnoreCase("Biomedical Library"))
 		{	
+    	    TOP_HEIGHT = height-height/5*3 + 115;
+			headerView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, TOP_HEIGHT));
+
 			strings[6] = "(310) 825-4904";
 			strings[8] = "http://maps.google.com/?q=UCLA Louise M. Darling Biomedical Library";
 

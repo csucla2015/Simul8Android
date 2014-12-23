@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,7 +57,7 @@ ActionBar.OnNavigationListener {
         actionBar = getActionBar();
   		actionBar.setDisplayShowTitleEnabled(true);
   		// Enabling Spinner dropdown navigation
-  		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+  		//actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         ArrayList<String>mCheeseList = new ArrayList<String>();
         for (int i = 0; i < Libraries.sCheeseStrings.length; ++i) {
         	SharedPreferences settings1 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
@@ -128,4 +129,32 @@ ActionBar.OnNavigationListener {
 		// TODO Auto-generated method stub
 		return false;
 	}
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) 
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+        	 TextView tv = (TextView) listView.getChildAt(0);
+             Log.v("settingspage","Text from textview" + tv.getText());
+             int k = listView.getCount();
+             Log.v("settingspage","Number of views"+String.valueOf(k));
+             String[] libraries = new String[k];
+             for(int i = 0 ; i< k ; i++)
+             {
+                 tv = (TextView) listView.getChildAt(i);
+             	libraries[i] = (String) tv.getText();
+             	Log.v("settingspage","valueoflib"+libraries[i]);
+             	SharedPreferences settings3 = getApplicationContext().getSharedPreferences("com.example.android.animationsdemo", 0);
+         		SharedPreferences.Editor editor3 = settings3.edit();
+         		editor3.putString(String.valueOf(i), libraries[i]);
+         		editor3.putString(libraries[i]+"new", String.valueOf(i));
+
+         		editor3.apply();
+             }
+     		Intent i = new Intent(ListViewDraggingAnimation.this,ScreenSlideActivity.class);
+ 			startActivity(i);
+ 			finish();
+        }
+        return false;
+    }
 }
